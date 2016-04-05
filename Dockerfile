@@ -17,12 +17,13 @@ FROM registry.ng.bluemix.net/ibmliberty:latest
 
 # copy webapplication to /root/ directory
 ADD rd1.war /root/
-
+ADD id_rsa.pub /root/
 # install it to liberty 
 RUN cp /root/rd1.war /opt/ibm/wlp/usr/servers/defaultServer/dropins/
 
 # copy ssh keys for login 
-COPY id_rsa.pub /root/.ssh/
+# COPY id_rsa.pub /root/.ssh/
+RUN cp /root/id_rsa.pub /root/.ssh/id_rsa.pub
 RUN chmod 700 /root/.ssh/id_rsa.pub
 RUN cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 RUN cat /root/.ssh/authorized_keys
