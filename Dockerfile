@@ -31,7 +31,6 @@ RUN chmod 600 /root/.ssh/id_rsa.pub
 RUN ls -la /root/.ssh/
 
 # expose 9080 liberty and ssh port
-# workshop NLB
 EXPOSE 9080 22 
 
 # end of dockerfile
