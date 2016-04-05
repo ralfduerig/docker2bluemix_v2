@@ -57,7 +57,7 @@ stages:
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
     PORT: 9080,22,80,443
-    CONTAINER_NAME: rd-ice-liberty
+    CONTAINER_NAME: rd-docker-liberty
     DEPLOY_TYPE: red_black
     COMMAND: "#!/bin/bash\n# The following are some example deployment scripts.  Use\
       \ these as is or fork them and include your updates here:\necho -e \"${label_color}Starting\
