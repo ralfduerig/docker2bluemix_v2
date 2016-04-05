@@ -14,7 +14,7 @@ stages:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
-      IMAGE_NAME: rd-ice-liberty
+      IMAGE_NAME: ${CF_NAME}
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
       \ of logs: green, red, label_color, no_color.  \necho -e \"${label_color}Starting\
