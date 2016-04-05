@@ -61,16 +61,10 @@ stages:
     DEPLOY_TYPE: red_black
     COMMAND: "#!/bin/bash\n# The following are some example deployment scripts.  Use\
       \ these as is or fork them and include your updates here:\necho -e \"${label_color}Starting\
-      \ deployment script${no_color}\"\n\n\n# To view/fork this script goto: https://github.com/Osthanes/deployscripts\n\
-      # git_retry will retry git calls to prevent pipeline failure on temporary github\
-      \ problems\n# the code can be found in git_util.sh at https://github.com/Osthanes/container_deployer\n\
-      \n# git_retry clone https://github.com/Osthanes/deployscripts.git deployscripts\n\
-      # git_retry clone https://hub.jazz.net/git/ralfduerig/myscripts.git deployscripts\n\
-      \n# git config --global user.name duerig@de.ibm.com\n# git config --global user.password\
-      \ xxxxxxxxxx\n\ngit_retry clone https://duerig%40de.ibm.com:xxxxxxxxxx@hub.jazz.net/git/ralfduerig/myscripts.git\
-      \ deployscripts\n\n#git config --global credential.https://hub.jazz.net.username\
-      \ duerig@de.ibm.com\n#git_retry clone https://hub.jazz.net/git/ralfduerig/myscripts.git\
-      \ deployscripts\n\n\n#git_retry clone https://github.com/Osthanes/deployscripts.git\
+      \ deployment script${no_color}\"\n\n\n# get the script: \n\# git_retry will retry git calls to prevent pipeline failure on temporary github\
+      \ git_retry clone https://github.com/ralfduerig/docker-scripts.git deployscripts \
+      
+      
       \ deployscripts\n\n# You can deploy your Image as either a single Container\
       \ or as a Container \n# Group.  A Container Group deploys a number of containers\
       \ to enhance\n# scalability or reliability.  By default we will deploy as a\
