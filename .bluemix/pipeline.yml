@@ -16,7 +16,7 @@ stages:
       space: ${CF_SPACE}
       IMAGE_NAME: myliberty
     USE_CACHED_LAYERS: 'true'
-    COMMAND: "#!/bin/bash\n export IMAGE_NAME='myliberty'\n# The following colors have been defined to help with presentation\
+    COMMAND: "#!/bin/bash\n export IMAGE_NAME='myliberty'\n echo $IMAGE_NAME \n\n# The following colors have been defined to help with presentation\
       \ of logs: green, red, label_color, no_color.  \necho -e \"${label_color}Starting\
       \ build script${no_color}\"\n\n# The IBM Container Service CLI (ice), Git client\
       \ (git), IDS Inventory CLI (ids-inv) and Python 2.7.3 (python) have been installed.\n\
