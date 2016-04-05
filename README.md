@@ -2,7 +2,7 @@ IBM Bluemix Container Test Project
 
 rd 2016
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ralfduerig/rhd.git) 
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ralfduerig/docker2bluemix.git) 
 
 
 
