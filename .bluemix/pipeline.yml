@@ -11,22 +11,24 @@ stages:
     type: builder
     extension_id: ibm.devops.services.pipeline.container.builder
     target:
-      url: ${CF_TARGET_URL}
-      organization: ${CF_ORGANIZATION}
-      space: ${CF_SPACE}
-      IMAGE_NAME: myliberty
+      url: https://api.ng.bluemix.net
+      organization: duerig@de.ibm.com
+      space: dev
+    IMAGE_NAME: myliberty
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
       \ of logs: green, red, label_color, no_color.  \necho -e \"${label_color}Starting\
-      \ build script${no_color}\"\n\n# The IBM Container Service CLI (ice), Git client\
-      \ (git), IDS Inventory CLI (ids-inv) and Python 2.7.3 (python) have been installed.\n\
-      # Based on the organization and space selected in the Job credentials are in\
-      \ place for both IBM Container Service and IBM Bluemix \n#####################\n\
-      # Run unit tests    #\n#####################\necho -e \"${label_color}No unit\
-      \ tests cases have been checked in ${no_color}\"\n\n######################################\n\
-      # Build Container via Dockerfile     #\n######################################\n\
-      \nREGISTRY_URL=${CCS_REGISTRY_HOST}/${NAMESPACE}\nFULL_REPOSITORY_NAME=${REGISTRY_URL}/${IMAGE_NAME}:${APPLICATION_VERSION}\n\
-      \n\nif [ -f Dockerfile ]; then \n    echo -e \"${label_color}Building ${FULL_REPOSITORY_NAME}\
+      \ build script${no_color}\"\n\n\n# set the image name\nexport IMAGE_NAME=myliberty\n\
+      echo \"IMAGE_NAME>\"\necho $IMAGE_NAME\n\n# The IBM Container Service CLI (ice),\
+      \ Git client (git), IDS Inventory CLI (ids-inv) and Python 2.7.3 (python) have\
+      \ been installed.\n# Based on the organization and space selected in the Job\
+      \ credentials are in place for both IBM Container Service and IBM Bluemix \n\
+      #####################\n# Run unit tests    #\n#####################\necho -e\
+      \ \"${label_color}No unit tests cases have been checked in ${no_color}\"\n\n\
+      ######################################\n# Build Container via Dockerfile   \
+      \  #\n######################################\n\nREGISTRY_URL=${CCS_REGISTRY_HOST}/${NAMESPACE}\n\
+      FULL_REPOSITORY_NAME=${REGISTRY_URL}/${IMAGE_NAME}:${APPLICATION_VERSION}\n\n\
+      \nif [ -f Dockerfile ]; then \n    echo -e \"${label_color}Building ${FULL_REPOSITORY_NAME}\
       \ ${no_color}\"\n    BUILD_COMMAND=\"\"\n    if [ \"${USE_CACHED_LAYERS}\" ==\
       \ \"true\" ]; then \n        BUILD_COMMAND=\"ice build --pull --tag ${FULL_REPOSITORY_NAME}\
       \ ${WORKSPACE}\"\n        ${BUILD_COMMAND}\n        RESULT=$?\n    else \n \
@@ -53,39 +55,31 @@ stages:
     type: deployer
     extension_id: ibm.devops.services.pipeline.docker.deploy.ice
     target:
-      url: ${CF_TARGET_URL}
-      organization: ${CF_ORGANIZATION}
-      space: ${CF_SPACE}
+      url: https://api.ng.bluemix.net
+      organization: duerig@de.ibm.com
+      space: dev
     PORT: 9080,22,80,443
-    CONTAINER_NAME: rd-docker-liberty
     DEPLOY_TYPE: red_black
+    CONTAINER_NAME: rd-docker-liberty
     COMMAND: "#!/bin/bash\n# The following are some example deployment scripts.  Use\
       \ these as is or fork them and include your updates here:\necho -e \"${label_color}Starting\
-      \ deployment script${no_color}\"\n\n\n# To view/fork this script goto: https://github.com/Osthanes/deployscripts\n\
-      # git_retry will retry git calls to prevent pipeline failure on temporary github\
-      \ problems\n# the code can be found in git_util.sh at https://github.com/Osthanes/container_deployer\n\
-      \n# git_retry clone https://github.com/Osthanes/deployscripts.git deployscripts\n\
-      # git_retry clone https://hub.jazz.net/git/ralfduerig/myscripts.git deployscripts\n\
-      \n# git config --global user.name duerig@de.ibm.com\n# git config --global user.password\
-      \ xxxxxxxxxx\n\ngit_retry clone https://www.github.com/ralfduerig/docker-scripts.git\
-      \ deployscripts\n\n#git config --global credential.https://hub.jazz.net.username\
-      \ duerig@de.ibm.com\n#git_retry clone https://hub.jazz.net/git/ralfduerig/myscripts.git\
-      \ deployscripts\n\n\n#git_retry clone https://github.com/Osthanes/deployscripts.git\
-      \ deployscripts\n\n# You can deploy your Image as either a single Container\
-      \ or as a Container \n# Group.  A Container Group deploys a number of containers\
-      \ to enhance\n# scalability or reliability.  By default we will deploy as a\
-      \ single \n# container.  To switch to a group deploy, comment out the line below\n\
-      # containing deploycontainer.sh and uncomment the line for deploygroup.sh\n\n\
-      # Deploy with containers:\n# Optional environment properties (can be set directly\
-      \ in this script, or defined as environment properties):\n#      NAME      \
-      \        Value         Description\n#   =============      =========     ==============\n\
-      #   BIND_TO             String       Specify a Bluemix application name that\
-      \ whose bound services you wish to make available to the container.  By default\
-      \ this is not set.\n#   CONTAINER_SIZE      String       Specify container size:\
-      \ m1.tiny (256), m1.small (512), m1.medium (1024), m1.large (2048).\n#     \
-      \                               Default is m1.tiny (256).\n#   CONCURRENT_VERSIONS\
-      \ Number       Number of versions of this container to leave active.  \n#  \
-      \                                  Default is 1\n#\n/bin/bash deployscripts/deploycontainer.sh\n\
+      \ deployment script${no_color}\"\n\n# get the required scripts\ngit_retry clone\
+      \ https://www.github.com/ralfduerig/docker-scripts.git deployscripts\n\n\n#\
+      \ You can deploy your Image as either a single Container or as a Container \n\
+      # Group.  A Container Group deploys a number of containers to enhance\n# scalability\
+      \ or reliability.  By default we will deploy as a single \n# container.  To\
+      \ switch to a group deploy, comment out the line below\n# containing deploycontainer.sh\
+      \ and uncomment the line for deploygroup.sh\n\n# Deploy with containers:\n#\
+      \ Optional environment properties (can be set directly in this script, or defined\
+      \ as environment properties):\n#      NAME              Value         Description\n\
+      #   =============      =========     ==============\n#   BIND_TO           \
+      \  String       Specify a Bluemix application name that whose bound services\
+      \ you wish to make available to the container.  By default this is not set.\n\
+      #   CONTAINER_SIZE      String       Specify container size: m1.tiny (256),\
+      \ m1.small (512), m1.medium (1024), m1.large (2048).\n#                    \
+      \                Default is m1.tiny (256).\n#   CONCURRENT_VERSIONS Number \
+      \      Number of versions of this container to leave active.  \n#          \
+      \                          Default is 1\n#\n/bin/bash deployscripts/deploycontainer.sh\n\
       \n# Deploy Container Group:\n# Optional environment properties (can be set directly\
       \ in this script, or defined as environment properties):\n#      NAME      \
       \        Value         Description\n#   =============      =========     ==============\n\
