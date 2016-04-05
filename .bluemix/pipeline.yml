@@ -63,8 +63,6 @@ stages:
       \ these as is or fork them and include your updates here:\necho -e \"${label_color}Starting\
       \ deployment script${no_color}\"\n\n\n# get the script: \n\# git_retry will retry git calls to prevent pipeline failure on temporary github\
       \ git_retry clone https://github.com/ralfduerig/docker-scripts.git deployscripts \
-      
-      
       \ deployscripts\n\n# You can deploy your Image as either a single Container\
       \ or as a Container \n# Group.  A Container Group deploys a number of containers\
       \ to enhance\n# scalability or reliability.  By default we will deploy as a\
