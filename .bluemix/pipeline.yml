@@ -67,7 +67,7 @@ stages:
       \n# git_retry clone https://github.com/Osthanes/deployscripts.git deployscripts\n\
       # git_retry clone https://hub.jazz.net/git/ralfduerig/myscripts.git deployscripts\n\
       \n# git config --global user.name duerig@de.ibm.com\n# git config --global user.password\
-      \ xxxxxxxxxx\n\ngit_retry clone https://duerig%40de.ibm.com:xxxxxxxxxx@hub.jazz.net/git/ralfduerig/myscripts.git\
+      \ xxxxxxxxxx\n\ngit_retry clone https://www.github.com/ralfduerig/myscripts.git\
       \ deployscripts\n\n#git config --global credential.https://hub.jazz.net.username\
       \ duerig@de.ibm.com\n#git_retry clone https://hub.jazz.net/git/ralfduerig/myscripts.git\
       \ deployscripts\n\n\n#git_retry clone https://github.com/Osthanes/deployscripts.git\
