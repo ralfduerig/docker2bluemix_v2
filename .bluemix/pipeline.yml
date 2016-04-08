@@ -9,28 +9,28 @@ stages:
   jobs:
   - name: Build
     type: builder
-    extension_id: ibm.devops.services.pipeline.container.builder
+    extension_id: ibm.${CF_SPACE}ops.services.pipeline.container.builder
     target:
-      url: https://api.ng.bluemix.net
-      organization: duerig@de.ibm.com
-      space: dev
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
     IMAGE_NAME: my-liberty-container
     USE_CACHED_LAYERS: 'true'
-    COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
-      \ of logs: green, red, label_color, no_color.  \necho -e \"${label_color}Starting\
-      \ build script${no_color}\"\n# set the image name\nexport IMAGE_NAME=my-liberty-container\n\
-      echo \"IMAGE_NAME>\" $IMAGE_NAME\n# Build Container via Dockerfile \nREGISTRY_URL=${CCS_REGISTRY_HOST}/${NAMESPACE}\n\
+    COMMAND: "#!/bin/bash\n\n# some definitons\nexport IMAGE_NAME=my-liberty-container\n\
+      \n# The following colors have been defined to help with presentation of logs:\
+      \ green, red, label_color, no_color.  \necho -e \"${label_color}Starting build\
+      \ script${no_color}\"\n\n# Build Container via Dockerfile \nREGISTRY_URL=${CCS_REGISTRY_HOST}/${NAMESPACE}\n\
       FULL_REPOSITORY_NAME=${REGISTRY_URL}/${IMAGE_NAME}:${APPLICATION_VERSION}\n\n\
       if [ -f Dockerfile ]; then \n    echo -e \"${label_color}Building ${FULL_REPOSITORY_NAME}\
       \ ${no_color}\"\n    BUILD_COMMAND=\"\"\n    if [ \"${USE_CACHED_LAYERS}\" ==\
-      \ \"true\" ]; then \n        BUILD_COMMAND=\"ice build --pull --tag ${FULL_REPOSITORY_NAME}\
+      \ \"true\" ]; then \n        BUILD_COMMAND=\"cf ic build --pull --tag ${FULL_REPOSITORY_NAME}\
       \ ${WORKSPACE}\"\n        ${BUILD_COMMAND}\n        RESULT=$?\n    else \n \
-      \       BUILD_COMMAND=\"ice build --no-cache --tag ${FULL_REPOSITORY_NAME} ${WORKSPACE}\"\
-      \n        ${BUILD_COMMAND}\n        RESULT=$?\n    fi \n\n    if [ $RESULT -ne\
-      \ 0 ]; then\n        echo -e \"${red}Error building image ${no_color}\" | tee\
-      \ -a \"$ERROR_LOG_FILE\"\n        echo \"Build command: ${BUILD_COMMAND}\"\n\
-      \        ice info \n        ice images\n        ${EXT_DIR}/print_help.sh\n \
-      \       exit 1\n    else\n        echo -e \"${green}Container build of ${FULL_REPOSITORY_NAME}\
+      \       BUILD_COMMAND=\"cf ic build --no-cache --tag ${FULL_REPOSITORY_NAME}\
+      \ ${WORKSPACE}\"\n        ${BUILD_COMMAND}\n        RESULT=$?\n    fi \n\n \
+      \   if [ $RESULT -ne 0 ]; then\n        echo -e \"${red}Error building image\
+      \ ${no_color}\" | tee -a \"$ERROR_LOG_FILE\"\n        echo \"Build command:\
+      \ ${BUILD_COMMAND}\"\n        cf ic info \n        cf ic images\n        ${EXT_DIR}/print_help.sh\n\
+      \        exit 1\n    else\n        echo -e \"${green}Container build of ${FULL_REPOSITORY_NAME}\
       \ was successful ${no_color}\"\n    fi  \nelse \n    echo -e \"${red}Dockerfile\
       \ not found in project${no_color}\"\n    exit 1\nfi  \n\n# Copy any artifacts\
       \ that will be needed for deployment and testing to $WORKSPACE \necho \"IMAGE_NAME=${FULL_REPOSITORY_NAME}\"\
@@ -45,19 +45,21 @@ stages:
   jobs:
   - name: ContainerDeploy
     type: deployer
-    extension_id: ibm.devops.services.pipeline.docker.deploy.ice
+    extension_id: ibm.${CF_SPACE}ops.services.pipeline.docker.deploy.ice
     target:
-      url: https://api.ng.bluemix.net
-      organization: duerig@de.ibm.com
-      space: dev
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
     PORT: 9080,22,80,443
     CONTAINER_NAME: rd-docker-liberty
     DEPLOY_TYPE: red_black
     COMMAND: |-
       #!/bin/bash
       echo -e "${label_color}Starting deployment script${no_color}"
+
       # get the required scripts
       git_retry clone https://www.github.com/ralfduerig/docker-scripts.git deployscripts
+
       # Deploy with containers
       /bin/bash deployscripts/deploycontainer.sh
 
