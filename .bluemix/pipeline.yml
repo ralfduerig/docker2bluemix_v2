@@ -14,11 +14,11 @@ stages:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
-    IMAGE_NAME: my-liberty-container
+    IMAGE_NAME: my-liberty-container-v1
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
       \ of logs: green, red, label_color, no_color.  \necho -e \"${label_color}Starting\
-      \ build script${no_color}\"\n\n# set the image name\nexport IMAGE_NAME=my-liberty-container\n\
+      \ build script${no_color}\"\n\n# set the image name\nexport IMAGE_NAME=my-liberty-container-v1\n\
       echo \"IMAGE_NAME>\"\necho $IMAGE_NAME\n\n# Build Container via Dockerfile \
       \    \n\nREGISTRY_URL=${CCS_REGISTRY_HOST}/${NAMESPACE}\nFULL_REPOSITORY_NAME=${REGISTRY_URL}/${IMAGE_NAME}:${APPLICATION_VERSION}\n\
       \n\nif [ -f Dockerfile ]; then \n    echo -e \"${label_color}Building ${FULL_REPOSITORY_NAME}\
