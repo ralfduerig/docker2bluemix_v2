@@ -19,7 +19,7 @@ FROM registry.ng.bluemix.net/ibmliberty:latest
 ADD rd1.war /root/
 # install it to liberty 
 RUN cp /root/rd1.war /opt/ibm/wlp/usr/servers/defaultServer/dropins/
-ENV LICENSE accept
+# ENV LICENSE accept
 
 
 # copy ssh keys for login 
