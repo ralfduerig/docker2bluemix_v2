@@ -9,7 +9,7 @@ stages:
   jobs:
   - name: Build
     type: builder
-    extension_id: ibm.${CF_SPACE}ops.services.pipeline.container.builder
+    extension_id: ibm.devops.services.pipeline.container.builder
     target:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
@@ -45,7 +45,7 @@ stages:
   jobs:
   - name: ContainerDeploy
     type: deployer
-    extension_id: ibm.${CF_SPACE}ops.services.pipeline.docker.deploy.ice
+    extension_id: ibm.devops.services.pipeline.docker.deploy.ice
     target:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
