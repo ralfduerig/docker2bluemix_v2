@@ -11,7 +11,7 @@ stages:
     type: builder
     extension_id: ibm.devops.services.pipeline.container.builder
     target:
-      url: ${CF_TARGET_URL}
+      url: https://api.ng.bluemix.net
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
     IMAGE_NAME: my-liberty-container
@@ -47,7 +47,7 @@ stages:
     type: deployer
     extension_id: ibm.devops.services.pipeline.docker.deploy.ice
     target:
-      url: ${CF_TARGET_URL}
+      url: https://api.ng.bluemix.net
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
     PORT: 9080,22,80,443
