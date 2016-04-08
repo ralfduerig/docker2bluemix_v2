@@ -11,9 +11,9 @@ stages:
     type: builder
     extension_id: ibm.devops.services.pipeline.container.builder
     target:
-      url: https://api.ng.bluemix.net
-      organization: duerig@de.ibm.com
-      space: dev
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
     IMAGE_NAME: my-liberty-container
     USE_CACHED_LAYERS: 'true'
     COMMAND: "#!/bin/bash\n# The following colors have been defined to help with presentation\
@@ -47,9 +47,9 @@ stages:
     type: deployer
     extension_id: ibm.devops.services.pipeline.docker.deploy.ice
     target:
-      url: https://api.ng.bluemix.net
-      organization: duerig@de.ibm.com
-      space: dev
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
     PORT: 9080,22,80,443
     CONTAINER_NAME: rd-docker-liberty
     DEPLOY_TYPE: red_black
