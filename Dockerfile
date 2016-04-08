@@ -25,9 +25,9 @@ RUN cp /root/rd1.war /opt/ibm/wlp/usr/servers/defaultServer/dropins/
 # copy ssh keys for login 
 COPY cloud.key.pub /root/.ssh/
 RUN cat /root/.ssh/cloud.key.pub >> /root/.ssh/authorized_keys
-# just check content o files
-RUN ls -la /root/.ssh/
-RUN cat /root/.ssh/authorized_keys
+## just check content of files
+# RUN ls -la /root/.ssh/
+# RUN cat /root/.ssh/authorized_keys
 
 # expose 9080 liberty and ssh port
 EXPOSE 9080 22 
