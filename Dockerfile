@@ -30,6 +30,13 @@ RUN cat /root/.ssh/authorized_keys
 # expose 9080 liberty and ssh port
 EXPOSE 9080 22 
 
+# get and install openssh 
+RUN apt-get update
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+# start ssh deamon
+CMD ["/usr/sbin/sshd", "-D"]
+
 # end of dockerfile
 
 
