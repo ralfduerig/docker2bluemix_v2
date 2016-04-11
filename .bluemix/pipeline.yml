@@ -23,13 +23,13 @@ stages:
       \    \n\nREGISTRY_URL=${CCS_REGISTRY_HOST}/${NAMESPACE}\nFULL_REPOSITORY_NAME=${REGISTRY_URL}/${IMAGE_NAME}:${APPLICATION_VERSION}\n\
       \n\nif [ -f Dockerfile ]; then \n    echo -e \"${label_color}Building ${FULL_REPOSITORY_NAME}\
       \ ${no_color}\"\n    BUILD_COMMAND=\"\"\n    if [ \"${USE_CACHED_LAYERS}\" ==\
-      \ \"true\" ]; then \n        BUILD_COMMAND=\"cf ic build --pull --tag ${FULL_REPOSITORY_NAME}\
+      \ \"true\" ]; then \n        BUILD_COMMAND=\"ice build --pull --tag ${FULL_REPOSITORY_NAME}\
       \ ${WORKSPACE}\"\n        ${BUILD_COMMAND}\n        RESULT=$?\n    else \n \
-      \       BUILD_COMMAND=\"cf ic build --no-cache --tag ${FULL_REPOSITORY_NAME}\
+      \       BUILD_COMMAND=\"ice build --no-cache --tag ${FULL_REPOSITORY_NAME}\
       \ ${WORKSPACE}\"\n        ${BUILD_COMMAND}\n        RESULT=$?\n    fi \n\n \
       \   if [ $RESULT -ne 0 ]; then\n        echo -e \"${red}Error building image\
       \ ${no_color}\" | tee -a \"$ERROR_LOG_FILE\"\n        echo \"Build command:\
-      \ ${BUILD_COMMAND}\"\n        cf ic info \n        cf ic images\n        ${EXT_DIR}/print_help.sh\n\
+      \ ${BUILD_COMMAND}\"\n        ice info \n        ice images\n        ${EXT_DIR}/print_help.sh\n\
       \        exit 1\n    else\n        echo -e \"${green}Container build of ${FULL_REPOSITORY_NAME}\
       \ was successful ${no_color}\"\n    fi  \nelse \n    echo -e \"${red}Dockerfile\
       \ not found in project${no_color}\"\n    exit 1\nfi  \n\n# Copy any artifacts\
