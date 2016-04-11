@@ -18,4 +18,4 @@ http://inet-adress-of-your-deployed-docker:9080/rd1/MyServlet
 you can connect to the container via ssh (generate your own cloud.key) 
 or you can connect to container directly via 
 cf ic using:
- #cf ic exec -it <container-id> /bin/bash
+ #cf ic exec -it [container-id] /bin/bash
