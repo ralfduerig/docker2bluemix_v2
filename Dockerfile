@@ -13,7 +13,9 @@
 #   limitations under the License.
 
 # pull the latest IBM liberty image from registry
-FROM ${CCS_REGISTRY_HOST}/ibmliberty:latest
+# usse this for region UK
+FROM registry.eu-gb.bluemix.net/ibmliberty:latest
+# use this for region US
 # FROM registry.ng.bluemix.net/ibmliberty:latest
 
 # copy webapplication to /root/ directory
