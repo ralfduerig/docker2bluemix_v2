@@ -13,7 +13,8 @@
 #   limitations under the License.
 
 # pull the latest IBM liberty image from registry
-FROM registry.ng.bluemix.net/ibmliberty:latest
+FROM ${CCS_REGISTRY_HOST}/ibmliberty:latest
+# FROM registry.ng.bluemix.net/ibmliberty:latest
 
 # copy webapplication to /root/ directory
 ADD rd1.war /root/
