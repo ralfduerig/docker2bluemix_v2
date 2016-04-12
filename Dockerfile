@@ -13,7 +13,7 @@
 #   limitations under the License.
 
 # pull the latest IBM liberty image from registry
-# usse this for region UK
+# use this for region UK
 # FROM registry.eu-gb.bluemix.net/ibmliberty:latest
 # use this for region US
 FROM registry.ng.bluemix.net/ibmliberty:latest
