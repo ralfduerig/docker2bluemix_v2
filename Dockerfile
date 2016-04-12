@@ -14,9 +14,9 @@
 
 # pull the latest IBM liberty image from registry
 # usse this for region UK
-FROM registry.eu-gb.bluemix.net/ibmliberty:latest
+# FROM registry.eu-gb.bluemix.net/ibmliberty:latest
 # use this for region US
-# FROM registry.ng.bluemix.net/ibmliberty:latest
+FROM registry.ng.bluemix.net/ibmliberty:latest
 
 # copy webapplication to /root/ directory
 ADD rd1.war /root/
